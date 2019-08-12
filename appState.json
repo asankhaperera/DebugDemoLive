@@ -1,0 +1,146 @@
+{
+  "EDITOR_STATE": {
+    "allProjectFiles": {
+      "a5c8be85-d099-45cb-913b-f33f379826c3": {
+        "id": "a5c8be85-d099-45cb-913b-f33f379826c3",
+        "parent": null,
+        "name": "DebugDemoLive",
+        "type": "DIRECTORY",
+        "isDirectory": true,
+        "children": [
+          "7cad9ba9-fdab-49fa-a1be-1da20f551a7f"
+        ],
+        "isRemovable": false,
+        "filePath": "DebugDemoLive"
+      },
+      "7cad9ba9-fdab-49fa-a1be-1da20f551a7f": {
+        "id": "7cad9ba9-fdab-49fa-a1be-1da20f551a7f",
+        "parent": "a5c8be85-d099-45cb-913b-f33f379826c3",
+        "name": "lambda.js",
+        "type": "JS_LAMBDA",
+        "isDirectory": false,
+        "children": [],
+        "isRemovable": true,
+        "filePath": "DebugDemoLive/lambda.js",
+        "code": "let AWS = require('aws-sdk');\nlet SL_AWS = require('slappforge-sdk-aws');\nconst sqs = new SL_AWS.SQS(AWS);\n\nexports.handler = function (event, context, callback) {\n    debugger;\n\n    let messageBody = \"Hello World 2\";\n\n    sqs.sendMessage({\n        MessageBody: messageBody,\n        QueueUrl: `https://sqs.${process.env.AWS_REGION}.amazonaws.com/${process.env.SIGMA_AWS_ACC_ID}/sqs`,\n        DelaySeconds: '0',\n        MessageAttributes: {}\n    }, function (data) {\n        callback(null, { \"message\": \"Published : \" + messageBody });\n    }, function (error) {\n        callback(null, { \"message\": \"Failed : \" + error });\n    });\n\n}",
+        "config": {
+          "runtime": "nodejs8.10",
+          "handler": "handler",
+          "timeout": 60,
+          "memory": 128,
+          "layers": []
+        },
+        "triggers": [
+          {
+            "resourceName": "apigusEast1DebugDemoLivedebugdemoliveget",
+            "config": {}
+          }
+        ],
+        "testCases": {
+          "feb76c62-047c-4296-9953-bb39dae5bf4e": {
+            "id": "feb76c62-047c-4296-9953-bb39dae5bf4e",
+            "name": "Test",
+            "functionId": "7cad9ba9-fdab-49fa-a1be-1da20f551a7f",
+            "event": "{\n    \n}"
+          }
+        }
+      }
+    },
+    "deletedFiles": [],
+    "rootNode": "a5c8be85-d099-45cb-913b-f33f379826c3",
+    "openFiles": [
+      "7cad9ba9-fdab-49fa-a1be-1da20f551a7f"
+    ],
+    "currentFileId": "7cad9ba9-fdab-49fa-a1be-1da20f551a7f",
+    "resources": {
+      "sqssqs": {
+        "name": "sqssqs",
+        "type": "SQS",
+        "config": {
+          "mode": 1,
+          "existing": true,
+          "name": "sqs",
+          "url": "https://sqs.us-east-1.amazonaws.com/263248768798/sqs",
+          "selectedRegion": "us-east-1",
+          "deliveryDelay": "0",
+          "deliveryDelayUnit": "seconds",
+          "queueType": "standardQueue",
+          "defaultVisibilityTimeout": "30",
+          "defaultVisibilityTimeoutUnit": "seconds",
+          "messageRetentionPeriod": "345600",
+          "messageRetentionPeriodUnit": "seconds",
+          "maximumMessageSize": 256,
+          "receiveMessageWaitTime": "0",
+          "queueARN": "arn:aws:sqs:us-east-1:263248768798:sqs"
+        }
+      },
+      "apigusEast1DebugDemoLivedebugdemoliveget": {
+        "name": "apigusEast1DebugDemoLivedebugdemoliveget",
+        "type": "API_GATEWAY",
+        "config": {
+          "selectedRegion": "us-east-1",
+          "apiMode": 0,
+          "apiName": "DebugDemoLive",
+          "endpointType": "EDGE",
+          "resourceMode": 0,
+          "resourceName": "debugdemolive",
+          "resourcePath": "/debugdemolive",
+          "restMethod": "GET",
+          "proxyIntegration": false,
+          "enableCORS": true,
+          "stageMode": 0,
+          "stageName": "dev",
+          "mode": 0
+        }
+      }
+    },
+    "customTemplate": {
+      "dialect": null,
+      "definitions": {}
+    },
+    "envVariables": [
+      {
+        "lambdaId": "all",
+        "varKey": "SIGMA_AWS_ACC_ID",
+        "varValue": null,
+        "shouldPersist": false,
+        "displayOnly": false,
+        "editable": false
+      }
+    ],
+    "packageJSON": {
+      "dependencies": {
+        "aws-sdk": {
+          "name": "aws-sdk",
+          "language": "javascript",
+          "version": "2.176.0",
+          "dev": true,
+          "notRemovable": false
+        },
+        "slappforge-sdk-aws": {
+          "name": "slappforge-sdk-aws",
+          "language": "javascript",
+          "version": "0.0.5",
+          "dev": false,
+          "notRemovable": false
+        }
+      }
+    }
+  },
+  "PROJECT_META": {
+    "projectName": "DebugDemoLive",
+    "projectDescription": "",
+    "projectVersion": "1.0.0",
+    "projectRegion": "us-east-1",
+    "platform": "AWS",
+    "platformRegions": {},
+    "lastSave": 1565615987052
+  },
+  "VCS_STATE": {
+    "provider": "GitHub",
+    "repo": {
+      "name": "DebugDemoLive",
+      "url": "https://github.com/asankhaperera/DebugDemoLive"
+    }
+  }
+}
